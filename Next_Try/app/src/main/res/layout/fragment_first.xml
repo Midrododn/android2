@@ -10,11 +10,11 @@
         android:id="@+id/textview_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
         android:text="@string/hello_first_fragment"
         app:layout_constraintBottom_toTopOf="@id/button_first"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_first"
@@ -37,4 +37,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/text_bar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/text_bar_text"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:labelFor="@id/textview_first"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/textview_first"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

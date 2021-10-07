@@ -1,6 +1,5 @@
 package com.example.next_try;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.next_try.databinding.FragmentFirstBinding;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class FirstFragment extends Fragment {
 

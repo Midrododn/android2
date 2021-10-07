@@ -24,5 +24,13 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_DBFragment"
+            app:destination="@id/DBFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/DBFragment2"
+        android:name="com.example.next_try.DBFragment"
+        android:label="fragment_d_b"
+        tools:layout="@layout/fragment_d_b" />
 </navigation>

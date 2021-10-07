@@ -1,20 +1,24 @@
 <resources>
     <string name="app_name">Next_Try</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
+    <!-- first page  -->
     <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">Second Page</string>
     <string name="but_text2">Button 2</string>
     <string name="text_bar_text">Enter Text</string>
 
     <!-- second page -->
     <string name="but_img1">Image 1</string>
     <string name="but_img2">Image 2</string>
-    <string name="img_descr">Image</string>
+    <string name="img_description">Image</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">First Page</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="input_1">Enter text</string>
+
+    <!-- 3rd page  -->
+    <string name="hello_blank_fragment">Hello blank fragment. New Text</string>
+    <string name="button_to_3rd">3rd Page</string>
 </resources>

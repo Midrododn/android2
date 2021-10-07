@@ -16,7 +16,7 @@ public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
 
-    private String[] two_img = {"@drawable/fig_610_", "@drawable/fig_614_"};
+    private String[] img_col = {"@drawable/fig_610_", "@drawable/fig_614_"};
     private int img_switch = 0;
 
     @Override
@@ -40,6 +40,13 @@ public class SecondFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
+            }
+        });
+
+        binding.button3rd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(SecondFragment.this).navigate(R.id.action_SecondFragment_to_DBFragment);
             }
         });
 

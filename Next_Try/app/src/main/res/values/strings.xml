@@ -9,6 +9,11 @@
     <string name="but_text2">Button 2</string>
     <string name="text_bar_text">Enter Text</string>
 
+    <!-- second page -->
+    <string name="but_img1">Image 1</string>
+    <string name="but_img2">Image 2</string>
+    <string name="img_descr">Image</string>
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="input_1">Enter text</string>

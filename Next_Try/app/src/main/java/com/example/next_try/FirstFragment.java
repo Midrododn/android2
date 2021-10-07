@@ -21,7 +21,6 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
 
     private int count = 0;
-    //private String batTXT = new String();
 
     @Override
     public View onCreateView(
@@ -50,10 +49,14 @@ public class FirstFragment extends Fragment {
         binding.buttonToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String batTXT = in_txt.getText().toString();
-                //batTXT = "Text example";
-                //batTXT = in_txt.getText().toString();
+                String batTXT = "";
+                batTXT += in_txt.getText().toString();
                 count++;
+                if (batTXT == ""){
+                    batTXT = "Empty Text";
+                }else {
+                    batTXT = batTXT.replace(" ", "_");
+                }
                 msg.setText("Button pressed " + count + " times.");
                 Toast myToast = Toast.makeText(getActivity(), batTXT, Toast.LENGTH_SHORT);
                 myToast.show();

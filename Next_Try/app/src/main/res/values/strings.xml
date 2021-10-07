@@ -20,5 +20,9 @@
 
     <!-- 3rd page  -->
     <string name="hello_blank_fragment">Hello blank fragment. New Text</string>
+    <string name="but_plus">+</string>
+    <string name="but_minus">-</string>
+    <string name="but_todb">Append</string>
     <string name="button_to_3rd">3rd Page</string>
+    <string name="db_out">List of vars</string>
 </resources>

@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/but_img1"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/button_second"
@@ -42,15 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/but_img2"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button_second"
+        app:layout_constraintBottom_toTopOf="@+id/button_3rd"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/img_description"
         app:layout_constraintEnd_toEndOf="parent"

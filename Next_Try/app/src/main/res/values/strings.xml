@@ -25,4 +25,5 @@
     <string name="but_todb">Append</string>
     <string name="button_to_3rd">3rd Page</string>
     <string name="db_out">List of vars</string>
+    <string name="gen_db">Generate DB</string>
 </resources>

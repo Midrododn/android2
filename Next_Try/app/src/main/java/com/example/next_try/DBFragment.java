@@ -29,11 +29,12 @@ public class DBFragment extends Fragment {
     }
     public void generateDB(){
         myData = SQLiteDatabase.openOrCreateDatabase("db",null);
-        String table;
+
+        /*String table;
         table = "CREATE TABLE IF NOT EXISTS vars_table (" +
                 "   var_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "   var_name text NOT NULL);";
-        myData.execSQL(table);
+        myData.execSQL("CREATE TABLE IF NOT EXISTS vars_table ( var_id INTEGER PRIMARY KEY AUTOINCREMENT,  var_name text NOT NULL);"); */
     }
 
     @Override
@@ -92,7 +93,7 @@ public class DBFragment extends Fragment {
         binding.button3rdGendb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //generateDB();
+                generateDB();
             }
         });
     }

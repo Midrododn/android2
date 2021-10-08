@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">DBtry1</string>
+    <string name="action_settings">Settings</string>
+    <!-- 1st fragment -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="next">Next</string>
+    <string name="textview_1st_numb">0</string>
+    <string name="textbar_1st_sname"> Student Name</string>
+    <string name="textbar_1st_sid">Student ID</string>
+    <string name="textbar_empty">""</string>
+    
+    <string name="btn_1st_add">ADD</string>
+    <string name="btn_1st_find">FIND</string>
+    <string name="btn_1st_delete">DELETE</string>
+    <string name="btn_1st_update">UPDATE</string>
+    <string name="btn_1st_load">LOAD DATA</string>
+
+    <!-- 2nd fragment -->
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

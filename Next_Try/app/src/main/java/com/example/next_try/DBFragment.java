@@ -22,6 +22,10 @@ public class DBFragment extends Fragment {
     private LinkedList<String> varList = new LinkedList<String>();
     private SQLiteDatabase myData ;
 
+    static {
+        System.loadLibrary("next_try");
+    }
+
     private void parseAndWrite (int var){
         String par = Integer.toString(var);
         String ins = "INSERT INTO vars_table VALUES ('" + par + "','" + par + "');";
@@ -59,7 +63,7 @@ public class DBFragment extends Fragment {
         TextView listDB = view.findViewById(R.id.textView_dbout);
         TextView counterLabel = view.findViewById(R.id.label_page_3);
         counterLabel.setText("0");
-        varList.add("List from DB:\n");
+        varList.add("List from DB(will):\n");
 
         binding.button3rdMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +84,7 @@ public class DBFragment extends Fragment {
         binding.button3rdAddtodb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String conv = Integer.toString(putToDB);
+                String conv = Integer.toString(putToDB) + Integer.toString(ret_int());
                 varList.add(conv);
                 conv = varList.toString();
                 conv = conv.replace("["," ");
@@ -90,11 +94,7 @@ public class DBFragment extends Fragment {
             }
         });
 
-        binding.button3rdGendb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                generateDB();
-            }
-        });
     }
+
+    public native int ret_int();
 }

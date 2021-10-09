@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CAndroid</string>
+    <string name="gen_db">Generate DB</string>
+    <string name="db_status">No info</string>
 </resources>

@@ -44,7 +44,6 @@ public class FirstFragment extends Fragment {
         binding.btnadd1st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null,null, 1);
                 EditText st_id = view.findViewById(R.id.studentid);
                 int id = Integer.getInteger(st_id.getText().toString());
@@ -52,10 +51,24 @@ public class FirstFragment extends Fragment {
                 String name = st_name.getText().toString();
                 Student student = new Student(id, name);
                 dbHandler.addHandler(student);
+                String student_row = "";
+                TextView label = view.findViewById(R.id.viewnumb_1st);
+                student_row = Integer.toString(id) + " " + name;
+                label.setText(student_row);
                 st_id.setText("");
                 st_name.setText("");
             }
         });
+
+        binding.btnload1st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null, null, 1);
+                TextView label = view.findViewById(R.id.viewnumb_1st);
+                label.setText(dbHandler.loadHandler());
+            }
+        });
+
     }
 
     @Override

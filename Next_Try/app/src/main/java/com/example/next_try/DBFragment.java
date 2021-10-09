@@ -19,6 +19,7 @@ public class DBFragment extends Fragment {
     private FragmentDBBinding binding;
 
     private int putToDB = 0;
+    private int prev = 0;
     private LinkedList<String> varList = new LinkedList<String>();
     private SQLiteDatabase myData ;
 
@@ -26,6 +27,7 @@ public class DBFragment extends Fragment {
         System.loadLibrary("next_try");
     }
 
+    /*
     private void parseAndWrite (int var){
         String par = Integer.toString(var);
         String ins = "INSERT INTO vars_table VALUES ('" + par + "','" + par + "');";
@@ -34,12 +36,13 @@ public class DBFragment extends Fragment {
     public void generateDB(){
         myData = SQLiteDatabase.openOrCreateDatabase("db",null);
 
-        /*String table;
+        String table;
         table = "CREATE TABLE IF NOT EXISTS vars_table (" +
                 "   var_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "   var_name text NOT NULL);";
-        myData.execSQL("CREATE TABLE IF NOT EXISTS vars_table ( var_id INTEGER PRIMARY KEY AUTOINCREMENT,  var_name text NOT NULL);"); */
+        myData.execSQL("CREATE TABLE IF NOT EXISTS vars_table ( var_id INTEGER PRIMARY KEY AUTOINCREMENT,  var_name text NOT NULL);");
     }
+    */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,10 @@ public class DBFragment extends Fragment {
         binding.button3rdAddtodb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String conv = Integer.toString(putToDB) + Integer.toString(ret_int());
+                String rsum = "(" + Integer.toString(rollSum(prev,putToDB)) + ")";
+                String conv = Integer.toString(putToDB) + Integer.toString(ret_int()) +
+                        rsum;
+                prev = putToDB;
                 varList.add(conv);
                 conv = varList.toString();
                 conv = conv.replace("["," ");
@@ -97,4 +103,5 @@ public class DBFragment extends Fragment {
     }
 
     public native int ret_int();
+    public native int rollSum(int a, int b);
 }

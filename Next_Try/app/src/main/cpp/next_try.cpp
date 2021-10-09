@@ -1,4 +1,6 @@
 #include <jni.h>
+#include "sqlite3(xtrnl).h"
+#include "db_met.h"
 
 // Write C++ code here.
 //
@@ -21,4 +23,12 @@ extern "C" JNIEXPORT jint JNICALL
 Java_com_example_next_1try_DBFragment_ret_1int(JNIEnv *env, jobject thiz) {
     int8_t ret_out = 123;
     return ret_out;
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_example_next_1try_DBFragment_rollSum(JNIEnv *env, jobject thiz, jint a, jint b) {
+    int frst = a;
+    int scnd = b;
+    return sumTwo(frst, scnd);
 }

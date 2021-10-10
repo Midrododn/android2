@@ -59,9 +59,9 @@ public class FirstFragment extends Fragment {
         binding.button1Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int check = 0;
+                String check = "";
                 check = saveText();
-                String textRow = Integer.toString(check);
+                String textRow = check;
                 textRow = textRow + ("(Add)\nText from bar :\n " + txtBar.getText().toString());
                 //label1.setText(textRow);
             }
@@ -70,14 +70,16 @@ public class FirstFragment extends Fragment {
         binding.button1Load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadText();
+                String loadedData = "";
+                loadedData = loadText();
                 String textRow = "(Load)\nText from bar :\n " + txtBar.getText().toString();
-                //label1.setText(textRow);
+                textRow = "(Load)\nText from bar :\n " + loadedData;
+                label1.setText(textRow);
             }
         });
     }
 
-    private int saveText() {
+    private String saveText() {
         sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         String txt_bar = txtBar.getText().toString();
@@ -85,14 +87,24 @@ public class FirstFragment extends Fragment {
         ed.commit();
         label1.setText(txt_bar);
 
-        Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT);
-
-        return 1;
+        return txt_bar;
     }
-    private void loadText() {
+    private String loadText() {
         sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String savedText = sPref.getString(SAVED_TEXT, "");
-        label1.setText(savedText);
+
+        String textRow = "(Load)\nText from bar :\n " + savedText;
+        label1.setText(textRow);
+
+        String Ttext = "";
+        if (savedText == ""){
+            Ttext = "Empty string loaded";
+        } else {
+            Ttext = "Data loaded";
+        }
+        Toast.makeText(getActivity(), Ttext, Toast.LENGTH_SHORT).show();
+
+        return savedText;
     }
 
     @Override

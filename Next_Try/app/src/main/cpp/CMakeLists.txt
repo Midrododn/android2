@@ -22,6 +22,12 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
+             db_met.h
+            next_try.cpp
+            shell.c
+            sqlite3.c
+            sqlite3.h
+            sqlite3ext.h
              next_try.cpp )
 
 # Searches for a specified prebuilt library and stores the path as a

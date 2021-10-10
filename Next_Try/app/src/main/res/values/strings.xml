@@ -26,4 +26,6 @@
     <string name="button_to_3rd">3rd Page</string>
     <string name="db_out">List of vars</string>
     <string name="gen_db">Generate DB</string>
+    <string name="text_3rd_dbstatus">Unknown</string>
+    <string name="but_3rd_txt">Make txt</string>
 </resources>

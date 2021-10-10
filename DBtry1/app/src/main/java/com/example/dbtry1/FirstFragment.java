@@ -33,6 +33,11 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null,null, 1);
+        EditText st_id = view.findViewById(R.id.studentid);
+        EditText st_name = view.findViewById(R.id.studentname);
+        TextView label = view.findViewById(R.id.viewnumb_1st);
+
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,15 +49,15 @@ public class FirstFragment extends Fragment {
         binding.btnadd1st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null,null, 1);
-                EditText st_id = view.findViewById(R.id.studentid);
+                //MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null,null, 1);
+                //EditText st_id = view.findViewById(R.id.studentid);
                 int id = Integer.getInteger(st_id.getText().toString());
-                EditText st_name = view.findViewById(R.id.studentname);
+                //EditText st_name = view.findViewById(R.id.studentname);
                 String name = st_name.getText().toString();
                 Student student = new Student(id, name);
                 dbHandler.addHandler(student);
                 String student_row = "";
-                TextView label = view.findViewById(R.id.viewnumb_1st);
+                //TextView label = view.findViewById(R.id.viewnumb_1st);
                 student_row = Integer.toString(id) + " " + name;
                 label.setText(student_row);
                 st_id.setText("");
@@ -63,8 +68,8 @@ public class FirstFragment extends Fragment {
         binding.btnload1st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null, null, 1);
-                TextView label = view.findViewById(R.id.viewnumb_1st);
+                //MyDBHandler dbHandler = new MyDBHandler(view.getContext(), null, null, 1);
+                //TextView label = view.findViewById(R.id.viewnumb_1st);
                 label.setText(dbHandler.loadHandler());
             }
         });

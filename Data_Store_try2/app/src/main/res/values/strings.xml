@@ -3,16 +3,19 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="empty_text"></string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <!-- first fragment -->
-    <string name="first_fragment_label">Data Storage : Preferences </string>
+    <string name="first_fragment_label">DB : Preferences </string>
+    <string name="hello_first_fragment">Hello first fragment</string>
     <string name="textbar_1st">Text</string>
     <string name="btn_1st_add">ADD</string>
     <string name="btn_1st_load">LOAD</string>
 
-
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <!-- second fragment -->
+    <string name="second_fragment_label">DB : LinkedList</string>
+    <string name="btn2_savetoList">ADD TO LIST</string>
+    <string name="btn2_loadList">LOAD LIST</string>
+    <string name="btn2_appendlist">APPEND LIST</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

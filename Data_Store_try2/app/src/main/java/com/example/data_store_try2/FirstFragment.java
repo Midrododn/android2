@@ -18,6 +18,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.data_store_try2.databinding.FragmentFirstBinding;
 
+import java.util.LinkedList;
+
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
@@ -61,9 +63,11 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 String check = "";
                 check = saveText();
-                String textRow = check;
-                textRow = textRow + ("(Add)\nText from bar :\n " + txtBar.getText().toString());
-                //label1.setText(textRow);
+                String textRow = "";
+                textRow = textRow + "(Add)\nText from bar :\n " + check;
+                label1.setText(textRow);
+
+                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -72,9 +76,11 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 String loadedData = "";
                 loadedData = loadText();
-                String textRow = "(Load)\nText from bar :\n " + txtBar.getText().toString();
+                String textRow = "";
                 textRow = "(Load)\nText from bar :\n " + loadedData;
                 label1.setText(textRow);
+
+                Toast.makeText(getActivity(), "Loaded", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -82,10 +88,11 @@ public class FirstFragment extends Fragment {
     private String saveText() {
         sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
-        String txt_bar = txtBar.getText().toString();
+        String txt_bar = ""; // txtBar.getText().toString()
+        txt_bar = txtBar.getText().toString(); // getSha
         ed.putString(SAVED_TEXT, txt_bar);
         ed.commit();
-        label1.setText(txt_bar);
+        //label1.setText(txt_bar);
 
         return txt_bar;
     }
@@ -93,16 +100,9 @@ public class FirstFragment extends Fragment {
         sPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String savedText = sPref.getString(SAVED_TEXT, "");
 
+        if (savedText == ""){ savedText = "!Empty string loaded!"; }
         String textRow = "(Load)\nText from bar :\n " + savedText;
-        label1.setText(textRow);
-
-        String Ttext = "";
-        if (savedText == ""){
-            Ttext = "Empty string loaded";
-        } else {
-            Ttext = "Data loaded";
-        }
-        Toast.makeText(getActivity(), Ttext, Toast.LENGTH_SHORT).show();
+        //label1.setText(textRow);
 
         return savedText;
     }

@@ -8,9 +8,10 @@
 
     <TextView
         android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
         android:layout_marginTop="50dp"
+        android:scrollbars="horizontal|vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2_append"
@@ -21,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginTop="68dp"
         android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_second" />
 
     <EditText
         android:id="@+id/editText2_text"
@@ -33,13 +34,13 @@
         android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="@string/textbar_1st"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text="@string/empty_text"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button2_addtolist"
@@ -65,9 +66,19 @@
         android:id="@+id/button2_append"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="100dp"
         android:text="@string/btn2_appendlist"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2_text" />
+
+    <Button
+        android:id="@+id/button2_delldb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/btn2_delete_db"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.data_store_try2;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class SecondFragment extends Fragment {
         btnAdd = view.findViewById(R.id.button2_addtolist);
         btnLoad = view.findViewById(R.id.button2_loadlist);
         lList = new LinkedList<String>();
+        label1.setMovementMethod(new ScrollingMovementMethod());
 
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,14 @@ public class SecondFragment extends Fragment {
                 lList.add(txt);
                 txt = "List generated :" + prnt_list();
                 label1.setText(txt);
+            }
+        });
+
+        binding.button2Delldb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lList = new LinkedList<String>();
+                add_list();
             }
         });
     }

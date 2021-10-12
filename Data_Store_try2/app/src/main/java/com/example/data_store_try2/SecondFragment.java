@@ -66,6 +66,14 @@ public class SecondFragment extends Fragment {
             }
         });
 
+        binding.button2Nextsqldb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_DBsqlite);
+            }
+        });
+
         binding.button2Addtolist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

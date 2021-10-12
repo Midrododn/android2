@@ -19,4 +19,7 @@
     <string name="btn2_appendlist">APPEND LIST</string>
     <string name="btn2_delete_db">DELETE ALL</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- 3rd sqlite -->
+    <string name="fragment_d_b__s_q_lite_try2">SQLite3</string>
+    <string name="text3_1st">!Hello blank fragment!</string>
 </resources>

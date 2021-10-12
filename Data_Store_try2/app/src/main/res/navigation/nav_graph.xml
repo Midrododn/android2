@@ -24,5 +24,13 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_DBsqlite"
+            app:destination="@+id/DB_SQLite_try2" />
     </fragment>
+    <fragment
+        android:id="@+id/DB_SQLite_try2"
+        android:name="com.example.data_store_try2.DB_SQLite_try2"
+        android:label="@string/fragment_d_b__s_q_lite_try2"
+        tools:layout="@layout/fragment_d_b__s_q_lite_try2" />
 </navigation>

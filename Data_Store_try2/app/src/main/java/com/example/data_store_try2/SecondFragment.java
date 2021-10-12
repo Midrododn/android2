@@ -29,11 +29,12 @@ public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
 
-    EditText txtBar;
-    Button btnLoad, btnAdd;
-    TextView label1;
-    SharedPreferences sPref;
-    LinkedList<String> lList = new LinkedList<String>();
+    private EditText txtBar;
+    private Button btnLoad, btnAdd;
+    private TextView label1;
+    private SharedPreferences sPref;
+    private LinkedList<String> lList = new LinkedList<String>();
+    private LinkedList<String> appendList = new LinkedList<String>();
 
     @Override
     public View onCreateView(
@@ -69,13 +70,17 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 add_list();
+                label1.setText("DB saved. Click Load DB.");
             }
         });
 
         binding.button2Loadlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                load_list();
+                lList = load_list();
+                String labelText = "Loaded data:\n";
+                labelText = labelText + prnt_list(lList);
+                label1.setText(labelText);
             }
         });
 
@@ -83,27 +88,42 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String txt = "";
-                txt = "\n" + txtBar.getText().toString();
-                lList.add(txt);
-                txt = "List generated :" + prnt_list();
+                txt = txtBar.getText().toString();
+                appendList.add(txt);
+                txt = "List generated :" + prnt_list(appendList);
                 label1.setText(txt);
+                txtBar.setText("");
             }
         });
 
         binding.button2Delldb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lList = new LinkedList<String>();
-                add_list();
+                del_db();
+                label1.setText("DB is empty now.");
             }
         });
     }
 
-    private String prnt_list() {
-        Iterator<String> iterator = lList.iterator();
+    private void del_db() {
+        LinkedList<String> emptyList = new LinkedList<String>();
+        sPref = getActivity().getSharedPreferences("pref1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editVar = sPref.edit();
+        Gson gtmp = new Gson();
+        String jsonStr = "";
+        jsonStr = gtmp.toJson(emptyList);
+        editVar.putString("courses", jsonStr);
+        editVar.apply();
+
+    }
+
+    private String prnt_list(LinkedList<String> toPrnt) {
+        LinkedList<String> outList = toPrnt;
+        Iterator<String> iterator = outList.iterator();
         String row = "";
+        int count = 0;
         while (iterator.hasNext()){
-            row = row + iterator.next();
+            row = row + "\n" + Integer.toString(++count) + ") " + iterator.next();
         }
 
         return row;
@@ -113,28 +133,33 @@ public class SecondFragment extends Fragment {
         sPref = getActivity().getSharedPreferences("pref1", Context.MODE_PRIVATE);
         SharedPreferences.Editor editVar = sPref.edit();
         Gson gtmp = new Gson();
-        String jsonStr = gtmp.toJson(lList);
+        String jsonStr = "";
+        LinkedList<String> loadedList = new LinkedList<String>();
 
+        loadedList = load_list();
+        Iterator<String> iterator = appendList.iterator();
+        String row = "";
+        while (iterator.hasNext()){
+            loadedList.add(iterator.next());
+        }
+        jsonStr = gtmp.toJson(loadedList);
         editVar.putString("courses", jsonStr);
         editVar.apply();
-        Toast.makeText(getActivity(), "Saved list", Toast.LENGTH_SHORT).show();
+        appendList = new LinkedList<String>();
+        //Toast.makeText(getActivity(), "Saved list", Toast.LENGTH_SHORT).show();
     }
 
-    private void load_list() {
+    private LinkedList<String> load_list() {
         sPref = getActivity().getSharedPreferences("pref1",Context.MODE_PRIVATE);
         Gson gtmp = new Gson();
+        LinkedList<String> listOut = new LinkedList<String>();
 
         String json = sPref.getString("courses", null);
         Type type = new TypeToken<LinkedList<String>>() {}.getType();
-        lList = gtmp.fromJson(json, type);
+        listOut = gtmp.fromJson(json, type);
 
-        String label_txt = "Loaded list : \n";
-        Iterator<String> iterator = lList.iterator();
-        while (iterator.hasNext()){
-            label_txt = label_txt + iterator.next();
-        }
-        label1.setText(label_txt);
-        Toast.makeText(getActivity(), "Loaded", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Loaded", Toast.LENGTH_SHORT).show();
+        return  listOut;
     }
 
 

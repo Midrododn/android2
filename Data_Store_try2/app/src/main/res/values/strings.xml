@@ -19,12 +19,23 @@
     <string name="btn2_appendlist">APPEND LIST</string>
     <string name="btn2_delete_db">DELETE ALL</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="btn2_sql">To SQLite3</string>
     <!-- 3rd sqlite -->
     <string name="fragment_d_b__s_q_lite_try2">SQLite3</string>
     <string name="input3_name">First Name</string>
-    <string name="input3_sname">Surname</string>
+    <string name="input3_mail">Mail</string>
     <string name="btn3_add">ADD</string>
     <string name="btn3_read">READ</string>
     <string name="btn3_clear">CLEAR</string>
     <string name="text3_1st">!Hello blank fragment!</string>
+    <string name="btn3_to_img">To IMG</string>
+    <!-- 4th img page -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text4_dir">Dir : </string>
+    <string name="img_graf">Image Graf</string>
+    <string name="btn4_showdir">Show Dir</string>
+    <string name="btn4_changeimg">Change Img</string>
+    <string name="btn4_createtxt">Create TXT</string>
+    <string name="btn4_showtxt">Show TXT</string>
+    <string name="dummy_txt">Dummy</string>
 </resources>

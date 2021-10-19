@@ -32,5 +32,15 @@
         android:id="@+id/DB_SQLite_try2"
         android:name="com.example.data_store_try2.DB_SQLite_try2"
         android:label="@string/fragment_d_b__s_q_lite_try2"
-        tools:layout="@layout/fragment_d_b__s_q_lite_try2" />
+        tools:layout="@layout/fragment_d_b__s_q_lite_try2">
+        <action
+            android:id="@+id/action_DB_SQL_to_img_Page"
+            app:destination="@+id/imgPage"
+        />
+    </fragment>
+    <fragment
+        android:id="@+id/imgPage"
+        android:name="com.example.data_store_try2.ImgPage"
+        android:label="fragment_img_page"
+        tools:layout="@layout/fragment_img_page" />
 </navigation>

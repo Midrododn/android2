@@ -45,5 +45,5 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
     public native int ret_int();
     public native int new_int();
-    public native String prnt_dir();
+    //public native String prnt_dir();
 }

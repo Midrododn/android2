@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Goggle_tut</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <!-- frst frag -->
+    <string name="btn1_showdir">DIR</string>
+    <string name="next">2nd</string>
+    <string name="first_fragment_label">1st</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <!-- snd frag -->
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">1st</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

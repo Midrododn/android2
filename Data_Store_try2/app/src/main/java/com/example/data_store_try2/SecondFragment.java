@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class SecondFragment extends Fragment {
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("mLog","next page");
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
@@ -109,8 +111,10 @@ public class SecondFragment extends Fragment {
             public void onClick(View v) {
                 del_db();
                 label1.setText("DB is empty now.");
+                Log.d("mLog", "!!!!works!!!");
             }
         });
+
     }
 
     private void del_db() {

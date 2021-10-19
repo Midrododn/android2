@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="32dp"
-        android:text="Button"
+        android:text="@string/btn2_sql"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_second" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,10 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
+            shell.c
+            sqlite3.c
+            sqlite3.h
+            sqlite3ext.h
              data_store_try2.cpp )
 
 # Searches for a specified prebuilt library and stores the path as a

@@ -1,17 +1,11 @@
 package com.example.data_store_try2;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultCaller;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +79,12 @@ public class DB_SQLite_try2 extends Fragment{
         binding.button3Clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String tmp1 = new String();
+                tmp1 = "Tmp txt";
+                File rootDataDir = getActivity().getFilesDir();
+                tmp1 = rootDataDir.toString();
+                tmp1 = c_strfun(tmp1);
+                txtView.setText(tmp1);
             }
         });
 
@@ -99,6 +99,7 @@ public class DB_SQLite_try2 extends Fragment{
     }
 
     public native int c_retstr();
+    public native String c_strfun(String text);
 
     @Override
     public void onDestroyView() {

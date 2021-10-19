@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.example.data_store_try2.databinding.FragmentDBSQLiteTry2Binding;
 
+import java.io.File;
+
 /*
  * A simple {@link Fragment} subclass.
  * Use the {@link DB_SQLite_try2#newInstance} factory method to
@@ -64,12 +66,19 @@ public class DB_SQLite_try2 extends Fragment{
         binding.button3Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String txt = new String();
+                txt = "Dir:\n";
+                File rootDataDir = getActivity().getFilesDir();
+                txt = rootDataDir.toString();
+                txtView.setText(txt);
             }
         });
 
         binding.button3Read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int res = c_retstr();
+                txtView.setText(Integer.toString(res));
             }
         });
 
@@ -88,6 +97,8 @@ public class DB_SQLite_try2 extends Fragment{
         });
 
     }
+
+    public native int c_retstr();
 
     @Override
     public void onDestroyView() {

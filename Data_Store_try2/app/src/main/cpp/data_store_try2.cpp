@@ -17,3 +17,9 @@
 //         System.loadLibrary("data_store_try2")
 //      }
 //    }
+extern "C" JNIEXPORT jint JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1retstr(JNIEnv *env, jobject thiz) {
+    int ret_int = 5;
+    
+    return ret_int;
+}

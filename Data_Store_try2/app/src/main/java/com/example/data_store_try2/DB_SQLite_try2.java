@@ -71,8 +71,12 @@ public class DB_SQLite_try2 extends Fragment{
         binding.button3Read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int res = c_retstr();
-                txtView.setText(Integer.toString(res));
+                String tmp = new String();
+                File rootDataDir = getActivity().getFilesDir();
+                tmp = rootDataDir.toString();
+                tmp = c_readtxt(tmp);
+                txtView.setText(tmp);
+
             }
         });
 
@@ -100,6 +104,7 @@ public class DB_SQLite_try2 extends Fragment{
 
     public native int c_retstr();
     public native String c_strfun(String text);
+    public native String c_readtxt(String pth);
 
     @Override
     public void onDestroyView() {

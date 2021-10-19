@@ -92,6 +92,17 @@ public class DB_SQLite_try2 extends Fragment{
             }
         });
 
+        binding.button3Createdb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String();
+                File rootDataDir = getActivity().getFilesDir();
+                tmp = rootDataDir.toString();
+                tmp = c_generateDB(tmp);
+                txtView.setText(tmp);
+            }
+        });
+
         binding.button4Toimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +116,8 @@ public class DB_SQLite_try2 extends Fragment{
     public native int c_retstr();
     public native String c_strfun(String text);
     public native String c_readtxt(String pth);
+    public native String c_generateDB(String pth);
+    public native String c_appendDB(String pth, String text_name);
 
     @Override
     public void onDestroyView() {

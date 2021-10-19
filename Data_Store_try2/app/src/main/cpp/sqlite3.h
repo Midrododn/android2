@@ -3290,7 +3290,7 @@ SQLITE_API int sqlite3_trace_v2(
 **
 ** ^If the progress callback returns non-zero, the operation is
 ** interrupted.  This feature can be used to implement a
-** "Cancel" button on a GUI progress dialog box.
+** "Cancel" button3_createdb on a GUI progress dialog box.
 **
 ** The progress handler callback must not do anything that will modify
 ** the database connection that invoked the progress handler.

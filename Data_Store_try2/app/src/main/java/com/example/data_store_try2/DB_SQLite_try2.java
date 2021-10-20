@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class DB_SQLite_try2 extends Fragment{
         btnRead = view.findViewById(R.id.button3_read);
         btnClear = view.findViewById(R.id.button3_clear);
         txtView = view.findViewById(R.id.textView3);
+        txtView.setMovementMethod(new ScrollingMovementMethod());
         etName = view.findViewById(R.id.editText3_name);
         etMail = view.findViewById(R.id.editText3_mail);
         name = "";
@@ -103,6 +105,28 @@ public class DB_SQLite_try2 extends Fragment{
             }
         });
 
+        binding.button3Appenddb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String();
+                File rootDataDir = getActivity().getFilesDir();
+                tmp = rootDataDir.toString();
+                tmp = c_appendDB(tmp, etName.getText().toString());
+                txtView.setText(tmp);
+            }
+        });
+
+        binding.button3Readdb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String();
+                File rootDataDir = getActivity().getFilesDir();
+                tmp = rootDataDir.toString();
+                tmp = c_readDB(tmp);
+                txtView.setText(tmp);
+            }
+        });
+
         binding.button4Toimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +142,7 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_readtxt(String pth);
     public native String c_generateDB(String pth);
     public native String c_appendDB(String pth, String text_name);
+    public native String c_readDB(String pth);
 
     @Override
     public void onDestroyView() {

@@ -11,12 +11,16 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="20dp"
+        android:maxWidth="150dp"
+        android:maxHeight="300dp"
+        android:scrollbars="vertical"
         android:text="@string/empty_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonrow3" />
+        app:layout_constraintTop_toBottomOf="@+id/csql_btns"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/editText3_name"

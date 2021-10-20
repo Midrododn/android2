@@ -32,6 +32,9 @@
     <string name="btn3_creatdb">Create DB</string>
     <string name="btn3_readdb">Read DB</string>
     <string name="btn3_appenddb">Append DB</string>
+    <string name="long_txt">l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n
+    l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n l\n
+    l\n l\n l\n </string>
     <!-- 4th img page -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text4_dir">Dir : </string>

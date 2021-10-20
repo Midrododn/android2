@@ -17,9 +17,9 @@
         android:scrollbars="vertical"
         android:text="@string/empty_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/csql_btns"
+        app:layout_constraintTop_toBottomOf="@+id/csql_btns2"
         tools:ignore="TextContrastCheck" />
 
     <EditText
@@ -93,7 +93,7 @@
 
     <TableRow
         android:id="@+id/csql_btns"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center|top"
         android:orientation="horizontal"
@@ -103,26 +103,26 @@
 
         <Button
             android:id="@+id/button3_createdb"
-            android:layout_marginHorizontal="10dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginHorizontal="10dp"
             android:text="@string/btn3_creatdb" />
 
         <Button
             android:id="@+id/button3_readdb"
-            android:layout_marginHorizontal="10dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginHorizontal="10dp"
             android:text="@string/btn3_readdb" />
 
         <Button
             android:id="@+id/button3_appenddb"
-            android:layout_marginHorizontal="10dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?android:attr/buttonBarButtonStyle"
+            android:layout_marginHorizontal="10dp"
             android:text="@string/btn3_appenddb" />
     </TableRow>
 
@@ -135,5 +135,42 @@
         android:text="@string/btn3_to_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonrow3" />
+
+    <TableRow
+        android:id="@+id/csql_btns2"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/csql_btns">
+
+        <Button
+            android:id="@+id/button3_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/btn3_finddb"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/button3_savedb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/btn3_savechange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/button3_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/btn3_delete"
+            style="?android:attr/buttonBarButtonStyle" />
+    </TableRow>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

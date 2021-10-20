@@ -17,12 +17,10 @@ import android.widget.TextView;
 import com.example.data_store_try2.databinding.FragmentDBSQLiteTry2Binding;
 
 import java.io.File;
+import java.util.Vector;
 
-/*
- * A simple {@link Fragment} subclass.
- * Use the {@link DB_SQLite_try2#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+// refactor to privet and empty rows; in construction;
 public class DB_SQLite_try2 extends Fragment{
 
     private FragmentDBSQLiteTry2Binding binding;
@@ -33,7 +31,6 @@ public class DB_SQLite_try2 extends Fragment{
     String name = new String();
     String mail = new  String();
 
-    DBHelper dbHelper;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -135,6 +132,22 @@ public class DB_SQLite_try2 extends Fragment{
             }
         });
 
+        binding.button3Find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String();
+                File rootDataDir = getActivity().getFilesDir();
+                tmp = rootDataDir.toString();
+                tmp = c_find(tmp, etName.getText().toString());
+                Vector<Integer> id_vector = new Vector();
+                tmp = c_idlist(tmp);
+                String ids = new String(); ids = "";
+                if (tmp.length() == 1){ txtView.setText("No match");}else{
+                    txtView.setText(ids);
+                }
+            }
+        });
+
     }
 
     public native int c_retstr();
@@ -143,6 +156,8 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_generateDB(String pth);
     public native String c_appendDB(String pth, String text_name);
     public native String c_readDB(String pth);
+    public native String c_find(String pth, String tname);
+    public native String c_idlist(String mixed_data);
 
     @Override
     public void onDestroyView() {

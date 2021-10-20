@@ -140,22 +140,6 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1appendDB(JNIEnv *env, job
     out = env -> NewStringUTF(ret_str.c_str());
     return out;
 }
-
-class data_out{
-public: char* data;
-};
-int callback_select(void *data, int argc, char **argv, char **azColName){
-    int i;
-    //fprintf(stderr, "%s: ", (const char*)data);
-
-    data = (void *)'C';
-
-    for(i = 0; i<argc; i++){
-        //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    //printf("\n");
-    return 0;
-}
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1readDB(JNIEnv *env, jobject thiz,
@@ -178,7 +162,6 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1readDB(JNIEnv *env, jobje
 
     sql_command = "SELECT * FROM test_table;";
 
-    //rc = sqlite3_exec(db, sql_command.c_str(),callback_select,(void *)data, &zErrMrg);
     sqlite3_prepare_v2(db, sql_command.c_str(), -1, &sql_stmt, NULL);
     sqlite3_bind_int(sql_stmt, 1, 2);
     while (sqlite3_step(sql_stmt) != SQLITE_DONE){
@@ -192,11 +175,63 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1readDB(JNIEnv *env, jobje
     return out;
 }
 
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1find(JNIEnv *env, jobject thiz, jstring pth,
+                                                            jstring tname) {
+    std::string full_pth(env ->GetStringUTFChars(pth,0)); full_pth += "/cpptest.db";
+    std::string uname(env ->GetStringUTFChars(tname,0));
+    std::string sql_command;
+    int id;
+    std::string txtname = "";
+    std::string ret_str = "";
+
+    sqlite3 *db;
+    sqlite3_stmt *sql_stmt;
+    int rc;
+    rc = sqlite3_open(full_pth.c_str(), &db);
+
+    sql_command = "SELECT * FROM test_table WHERE name LIKE '%" + uname + "%';";
+    sqlite3_prepare_v2(db, sql_command.c_str(),-1,&sql_stmt,NULL);
+    sqlite3_bind_int(sql_stmt, 1, 2);
+    while (sqlite3_step(sql_stmt) != SQLITE_DONE){
+        id = sqlite3_column_int(sql_stmt, 0);
+        txtname = reinterpret_cast<const char *>(sqlite3_column_text(sql_stmt,1));
+        ret_str += "id(" + std::to_string(id) + ")\nName : " + txtname + "\n";
+    }
+    ret_str += "-";
+    sqlite3_finalize(sql_stmt);
+    sqlite3_close(db);
+
+    jstring out;
+    out = env ->NewStringUTF(ret_str.c_str());
+    return out;
+}
 
 
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1idlist(JNIEnv *env, jobject thiz,
+                                                              jstring mixed_data) {
+    std::string row(env ->GetStringUTFChars(mixed_data,0));
+    std::string id_str = "0";
+    std::string ret_ids = "+";
+    jstring out;
+    int ret = 0;
+    int i = 0;
+    int j = 0;
 
+    if (row[0] == '-'){out = env ->NewStringUTF(id_str.c_str()); return out;} id_str = "";
+    for (i=0; row[i] != '-'; i++){
+        if (row[i] == '('){
+            for (j = i+1; row[j] != ')' ; ++j) {
+                id_str += row[j];
+            }
+            ret_ids += id_str;
+            id_str = "+";
+        }
 
-
-
-
-
+    }
+    id_str = "i" + ret_ids + "n";
+    out = env ->NewStringUTF(id_str.c_str());
+    return out;
+}

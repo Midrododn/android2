@@ -235,3 +235,41 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1idlist(JNIEnv *env, jobje
     out = env ->NewStringUTF(id_str.c_str());
     return out;
 }
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1setid(JNIEnv *env, jobject thiz,
+                                                             jstring idlist, jint id_nr) {
+    std::string row(env ->GetStringUTFChars(idlist,0));
+    std::string out_str; out_str = "OUT";
+    int nr = id_nr;
+
+    jstring out;
+    out = env ->NewStringUTF(out_str.c_str());
+    return out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

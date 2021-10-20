@@ -139,13 +139,12 @@ public class DB_SQLite_try2 extends Fragment{
                 File rootDataDir = getActivity().getFilesDir();
                 tmp = rootDataDir.toString();
                 tmp = c_find(tmp, etName.getText().toString());
-                Vector<Integer> id_vector = new Vector();
+                //Vector<Integer> id_vector = new Vector();
                 tmp = c_idlist(tmp);
-                String ids = new String(); ids = "";
-                if (tmp.length() == 1){ txtView.setText("No match");}else{
-                    txtView.setText(ids);
+                String ids = new String();
+                ids = c_setid(tmp, 0);
+                txtView.setText(ids);
                 }
-            }
         });
 
     }
@@ -158,6 +157,7 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_readDB(String pth);
     public native String c_find(String pth, String tname);
     public native String c_idlist(String mixed_data);
+    public native String c_setid(String idlist, int id_nr);
 
     @Override
     public void onDestroyView() {

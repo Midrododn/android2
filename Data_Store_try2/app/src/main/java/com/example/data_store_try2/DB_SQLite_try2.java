@@ -56,14 +56,17 @@ public class DB_SQLite_try2 extends Fragment{
         etMail = view.findViewById(R.id.editText3_mail);
         name = "";
         mail = "";
+        File pth_root = getActivity().getFilesDir();
+        String pthStr = pth_root.toString();
 
         binding.button3Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String txt = new String();
                 txt = "Dir:\n";
-                File rootDataDir = getActivity().getFilesDir();
-                txt = rootDataDir.toString();
+                //File rootDataDir = getActivity().getFilesDir();
+                //txt = rootDataDir.toString();
+                txt += pthStr;
                 txtView.setText(txt);
             }
         });
@@ -72,9 +75,9 @@ public class DB_SQLite_try2 extends Fragment{
             @Override
             public void onClick(View v) {
                 String tmp = new String();
-                File rootDataDir = getActivity().getFilesDir();
-                tmp = rootDataDir.toString();
-                tmp = c_readtxt(tmp);
+                //File rootDataDir = getActivity().getFilesDir();
+                //tmp = rootDataDir.toString();
+                tmp = c_readtxt(pthStr);
                 txtView.setText(tmp);
 
             }
@@ -85,9 +88,9 @@ public class DB_SQLite_try2 extends Fragment{
             public void onClick(View v) {
                 String tmp1 = new String();
                 tmp1 = "Tmp txt";
-                File rootDataDir = getActivity().getFilesDir();
-                tmp1 = rootDataDir.toString();
-                tmp1 = c_strfun(tmp1);
+                //File rootDataDir = getActivity().getFilesDir();
+                //tmp1 = rootDataDir.toString();
+                tmp1 = c_strfun(pthStr);
                 txtView.setText(tmp1);
             }
         });
@@ -96,9 +99,10 @@ public class DB_SQLite_try2 extends Fragment{
             @Override
             public void onClick(View v) {
                 String tmp = new String();
-                File rootDataDir = getActivity().getFilesDir();
-                tmp = rootDataDir.toString();
-                tmp = c_generateDB(tmp);
+                //File rootDataDir = getActivity().getFilesDir();
+                //tmp = rootDataDir.toString();
+                //tmp = c_generateDB(tmp);
+                tmp = c_generateDB(pthStr);
                 txtView.setText(tmp);
             }
         });
@@ -107,9 +111,9 @@ public class DB_SQLite_try2 extends Fragment{
             @Override
             public void onClick(View v) {
                 String tmp = new String();
-                File rootDataDir = getActivity().getFilesDir();
-                tmp = rootDataDir.toString();
-                tmp = c_appendDB(tmp, etName.getText().toString());
+                //File rootDataDir = getActivity().getFilesDir();
+                //tmp = rootDataDir.toString();
+                tmp = c_appendDB(pthStr, etName.getText().toString());
                 txtView.setText(tmp);
             }
         });
@@ -118,9 +122,9 @@ public class DB_SQLite_try2 extends Fragment{
             @Override
             public void onClick(View v) {
                 String tmp = new String();
-                File rootDataDir = getActivity().getFilesDir();
-                tmp = rootDataDir.toString();
-                tmp = c_readDB(tmp);
+                //File rootDataDir = getActivity().getFilesDir();
+                //tmp = rootDataDir.toString();
+                tmp = c_readDB(pthStr);
                 txtView.setText(tmp);
             }
         });
@@ -137,9 +141,9 @@ public class DB_SQLite_try2 extends Fragment{
             @Override
             public void onClick(View v) {
                 String tmp = new String();
-                File rootDataDir = getActivity().getFilesDir();
-                tmp = rootDataDir.toString();
-                tmp = c_find(tmp, etName.getText().toString());
+                //File rootDataDir = getActivity().getFilesDir();
+                //tmp = rootDataDir.toString();
+                tmp = c_find(pthStr, etName.getText().toString());
                 id_vector = new Vector();
                 tmp = c_idlist(tmp);
                 int next = 1;
@@ -172,6 +176,7 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_idlist(String mixed_data);
     public native String c_setid(String idlist, int id_nr);
     public native int c_retid(String idlist, int nxt);
+
 
     @Override
     public void onDestroyView() {

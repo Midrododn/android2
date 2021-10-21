@@ -30,6 +30,7 @@ public class DB_SQLite_try2 extends Fragment{
     TextView txtView;
     String name = new String();
     String mail = new  String();
+    Vector<Integer> id_vector = new Vector();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -139,11 +140,23 @@ public class DB_SQLite_try2 extends Fragment{
                 File rootDataDir = getActivity().getFilesDir();
                 tmp = rootDataDir.toString();
                 tmp = c_find(tmp, etName.getText().toString());
-                //Vector<Integer> id_vector = new Vector();
+                id_vector = new Vector();
                 tmp = c_idlist(tmp);
-                String ids = new String();
-                ids = c_setid(tmp, 0);
-                txtView.setText(ids);
+                int next = 1;
+                int idS = c_retid(tmp, next);
+
+                while (idS >0){
+                    idS = c_retid(tmp, next);
+                    if (idS != -1){
+                        id_vector.add(idS);
+                    }
+                    next++;
+                }
+                tmp = "";
+                for (Integer i=0;i < id_vector.size(); i++){
+                    tmp += id_vector.get(i) + "\n";
+                }
+                txtView.setText(tmp);
                 }
         });
 
@@ -158,6 +171,7 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_find(String pth, String tname);
     public native String c_idlist(String mixed_data);
     public native String c_setid(String idlist, int id_nr);
+    public native int c_retid(String idlist, int nxt);
 
     @Override
     public void onDestroyView() {

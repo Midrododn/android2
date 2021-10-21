@@ -240,7 +240,7 @@ JNIEXPORT jstring JNICALL
 Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1setid(JNIEnv *env, jobject thiz,
                                                              jstring idlist, jint id_nr) {
     std::string row(env ->GetStringUTFChars(idlist,0));
-    std::string out_str; out_str = "OUT\n";
+    std::string out_str; out_str = "";
     std::string id_str = "";
     int nr = id_nr;
     int j = 0;
@@ -250,38 +250,52 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1setid(JNIEnv *env, jobjec
             for (j = i + 1; row[j] != '+' ; ++j) {
                 id_str += row[j];
             }
-            out_str += id_str + "\n";
+            nr--;
+            if (nr == 0){
+                out_str += id_str;
+                jstring out;
+                out = env ->NewStringUTF(out_str.c_str());
+                return out;
+            }
             id_str = "";
         }
     }
 
+    out_str = "-1";
     jstring out;
     out = env ->NewStringUTF(out_str.c_str());
     return out;
 }
 
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1retid(JNIEnv *env, jobject thiz,
+                                                             jstring idlist, jint nxt) {
+    std::string row(env ->GetStringUTFChars(idlist,0));
+    std::string out_str; out_str = "";
+    std::string id_str = "";
+    int nr = nxt;
+    int j = 0;
+    int ret_id = -1;
 
+    for (int i = 0; row[i] != 'n'; ++i) {
+        if ((row[i] == '+')&&(row[i+1]!='n')){
+            for (j = i + 1; row[j] != '+' ; ++j) {
+                id_str += row[j];
+            }
+            nr--;
+            if (nr == 0){
+                out_str += id_str;
+                ret_id = std::stoi(id_str);
+                //out = env ->NewStringUTF(out_str.c_str());
+                return ret_id;
+            }
+            id_str = "";
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    out_str = "-1";
+    ret_id = -1;
+    //out = env ->NewStringUTF(out_str.c_str());
+    return ret_id;
+}

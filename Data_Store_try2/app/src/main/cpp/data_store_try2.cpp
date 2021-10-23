@@ -208,12 +208,11 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1find(JNIEnv *env, jobject
 }
 
 
-extern "C"
-JNIEXPORT jstring JNICALL
+extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1idlist(JNIEnv *env, jobject thiz,
                                                               jstring mixed_data) {
     std::string row(env ->GetStringUTFChars(mixed_data,0));
-    std::string id_str = "0";
+    std::string id_str = "text";
     std::string ret_ids = "+";
     jstring out;
     int ret = 0;
@@ -231,7 +230,7 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1idlist(JNIEnv *env, jobje
         }
 
     }
-    id_str = "i" + ret_ids + "+n";
+    id_str = "i" + ret_ids + "-n";
     out = env ->NewStringUTF(id_str.c_str());
     return out;
 }
@@ -267,35 +266,47 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1setid(JNIEnv *env, jobjec
     return out;
 }
 
+
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1retid(JNIEnv *env, jobject thiz,
-                                                             jstring idlist, jint nxt) {
-    std::string row(env ->GetStringUTFChars(idlist,0));
-    std::string out_str; out_str = "";
-    std::string id_str = "";
-    int nr = nxt;
-    int j = 0;
-    int ret_id = -1;
-
-    for (int i = 0; row[i] != 'n'; ++i) {
-        if ((row[i] == '+')&&(row[i+1]!='n')){
-            for (j = i + 1; row[j] != '+' ; ++j) {
-                id_str += row[j];
-            }
-            nr--;
-            if (nr == 0){
-                out_str += id_str;
-                ret_id = std::stoi(id_str);
-                //out = env ->NewStringUTF(out_str.c_str());
-                return ret_id;
-            }
-            id_str = "";
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1nexttest(JNIEnv *env, jobject thiz,
+                                                                jstring txtdata, jint nxt) {
+    int next = nxt;
+    int max = 6;
+    jint ret = -1;
+    int i = 0;
+    if (next > max){ return ret;}
+    else {
+        for (i = 1; (i < max); ++i) {
+            next -= i;
+            if (next == 0){ ret = i; return ret;}
         }
     }
+    ret = -2;
+    return ret;
+}
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1itertest(JNIEnv *env, jobject thiz,
+                                                                jstring txtdata, jint nxt) {
+    std::string out_str("test");
+    jstring out;
+    out = env ->NewStringUTF(out_str.c_str());
+    return out;
+}
 
-    out_str = "-1";
-    ret_id = -1;
-    //out = env ->NewStringUTF(out_str.c_str());
-    return ret_id;
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1malloctry1(JNIEnv *env, jobject thiz,
+                                                                  jstring roguedata) {
+    std::string row(env ->GetStringUTFChars(roguedata,0)); row = "testtext";
+    jstring out;
+
+    char * buf;
+
+    buf = (char *) malloc(4);
+
+    out = env ->NewStringUTF(row.c_str());
+    return out;
 }

@@ -141,27 +141,33 @@ public class DB_SQLite_try2 extends Fragment{
             @Override
             public void onClick(View v) {
                 String tmp = new String();
-                //File rootDataDir = getActivity().getFilesDir();
-                //tmp = rootDataDir.toString();
                 tmp = c_find(pthStr, etName.getText().toString());
                 id_vector = new Vector();
-                tmp = c_idlist(tmp);
-                int next = 1;
-                int idS = c_retid(tmp, next);
+                String tmp2 = new String(); tmp2 = "";
+                tmp2 = c_idlist(tmp);
+                txtView.setText(tmp2);
+                int next = 1; // ids start from 1
+                int idS = 1;
 
-                while (idS >0){
-                    idS = c_retid(tmp, next);
-                    if (idS != -1){
-                        id_vector.add(idS);
-                    }
-                    next++;
+                tmp2 ="test\n";
+
+                for (int i = 0 ; idS> -1; i++){
+                    idS = c_nexttest("test",i);
+                    tmp2 +=Integer.toString(idS);
                 }
-                tmp = "";
-                for (Integer i=0;i < id_vector.size(); i++){
-                    tmp += id_vector.get(i) + "\n";
-                }
+                //tmp2 += Integer.toString(next);
+                txtView.setText(tmp2);
+
+            }
+        });
+
+        binding.button3Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String(); tmp = "";
+                tmp = c_malloctry1("test1");
                 txtView.setText(tmp);
-                }
+            }
         });
 
     }
@@ -174,8 +180,9 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_readDB(String pth);
     public native String c_find(String pth, String tname);
     public native String c_idlist(String mixed_data);
-    public native String c_setid(String idlist, int id_nr);
-    public native int c_retid(String idlist, int nxt);
+    public native int c_nexttest(String txtdata, int nxt);
+    public native String c_itertest(String txtdata, int nxt);
+    public native String c_malloctry1(String roguedata);
 
 
     @Override

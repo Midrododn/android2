@@ -66,7 +66,8 @@ public class DB_SQLite_try2 extends Fragment{
                 txt = "Dir:\n";
                 //File rootDataDir = getActivity().getFilesDir();
                 //txt = rootDataDir.toString();
-                txt += pthStr;
+                txt += pthStr + "\nDir content: \n";
+                txt += c_dircont(pthStr);
                 txtView.setText(txt);
             }
         });
@@ -177,6 +178,7 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_find(String pth, String tname);
     public native String c_deleteDB(String pth, String idstr);
     public native String c_saveDB(String pth, String newname, String idstr);
+    public native String c_dircont(String pth);
 
 
     @Override

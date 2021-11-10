@@ -61,7 +61,7 @@ public class ImgPage extends Fragment {
                 File rootDataDir = getActivity().getFilesDir();
                 txt = rootDataDir.toString();
                 dir_txt.setText(txt);
-                txt = c_dircont(pthStr);
+                //txt = c_dircont(pthStr);
             }
         });
 
@@ -126,7 +126,7 @@ public class ImgPage extends Fragment {
     }
 
     public native String c_mkdir(String pth);
-    public native String c_dircont(String pth);
+    //public native String c_dircont(String pth);
 
     @Override
     public void onDestroyView() {

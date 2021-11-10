@@ -5,6 +5,7 @@
 #include "sqlite3.h"
 #include <sstream>
 #include<dirent.h>
+#include <filesystem>
 // Write C++ code here.
 //
 // Do not forget to dynamically load the C++ library into your application.
@@ -286,6 +287,27 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1saveDB(JNIEnv *env, jobje
     out = env -> NewStringUTF(ret_str.c_str());
     return out;
 }
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1dircont(JNIEnv *env, jobject thiz,
+                                                               jstring pth) {
+    std::string full_pth(env ->GetStringUTFChars(pth,0));
+    std::string ret_str = "";
+    struct dirent *d;
+    DIR *dr;
+
+    jstring out = (jstring) "test";
+
+    dr = opendir(full_pth.c_str());
+    if (dr != NULL){
+        for (d=readdir(dr);d!=NULL;d=readdir(dr)){ ret_str += d->d_name; ret_str += "\n";}
+        closedir(dr);
+    }
+
+    out = env -> NewStringUTF(ret_str.c_str());
+    return out;
+}
+// ------------------------------------------ IMGpage -------------------------------
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_data_1store_1try2_ImgPage_c_1mkdir(JNIEnv *env, jobject thiz, jstring pth) {

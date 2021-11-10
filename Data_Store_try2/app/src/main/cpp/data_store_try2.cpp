@@ -5,7 +5,6 @@
 #include "sqlite3.h"
 #include <sstream>
 #include<dirent.h>
-#include <filesystem>
 // Write C++ code here.
 //
 // Do not forget to dynamically load the C++ library into your application.
@@ -64,6 +63,7 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1readtxt(JNIEnv *env, jobj
 
     return out;
 }
+
 int callback_emptyfun(void *NotUsed, int argc, char **argv, char **azColName){return 0;} // sqlite support fun
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1generateDB(JNIEnv *env, jobject thiz,
@@ -142,6 +142,7 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1appendDB(JNIEnv *env, job
     out = env -> NewStringUTF(ret_str.c_str());
     return out;
 }
+
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1readDB(JNIEnv *env, jobject thiz,
@@ -293,6 +294,7 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1dircont(JNIEnv *env, jobj
                                                                jstring pth) {
     std::string full_pth(env ->GetStringUTFChars(pth,0));
     std::string ret_str = "";
+    std::string tmp = "";
     struct dirent *d;
     DIR *dr;
 
@@ -303,6 +305,19 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1dircont(JNIEnv *env, jobj
         for (d=readdir(dr);d!=NULL;d=readdir(dr)){ ret_str += d->d_name; ret_str += "\n";}
         closedir(dr);
     }
+
+    ret_str += "\n !!!UPPER DIR!!!\n";
+    int j = full_pth.length()-1; tmp = "";
+    for (j; (char) full_pth[j] != '/'; j-- ){ tmp += full_pth[j]; }
+    tmp = full_pth.substr(0,j);
+    ret_str += tmp + "\n";
+
+    dr = opendir(tmp.c_str());
+    if (dr != NULL){
+        for (d=readdir(dr);d!=NULL;d=readdir(dr)){ ret_str += d->d_name; ret_str += "\n";}
+        closedir(dr);
+    }
+
 
     out = env -> NewStringUTF(ret_str.c_str());
     return out;

@@ -2,12 +2,14 @@ package com.example.data_store_try2;
 
 import android.os.Bundle;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.data_store_try2.databinding.FragmentImgPageBinding;
@@ -23,13 +25,8 @@ public class ImgPage extends Fragment {
 
     private FragmentImgPageBinding binding;
     TextView dir_txt;
-
-    public static ImgPage newInstance(String param1, String param2) {
-        ImgPage fragment = new ImgPage();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    ImageView imggraf;
+    int imgNbr = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +48,10 @@ public class ImgPage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         dir_txt = view.findViewById(R.id.textView4_dir);
+        imggraf = view.findViewById(R.id.imgview4_graf);
+
+        File pth_root = getActivity().getFilesDir();
+        String pthStr = pth_root.toString();
 
         binding.button4Showdir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,7 @@ public class ImgPage extends Fragment {
                 File rootDataDir = getActivity().getFilesDir();
                 txt = rootDataDir.toString();
                 dir_txt.setText(txt);
+                txt = c_dircont(pthStr);
             }
         });
 
@@ -102,9 +104,9 @@ public class ImgPage extends Fragment {
                 txt_out = "";
                 try {
                     File fObj = new File(file_pth);
-                    Scanner myRedare = new Scanner(fObj);
-                    while (myRedare.hasNextLine()){
-                        txt_out = myRedare.nextLine() + "\n";
+                    Scanner myReader = new Scanner(fObj);
+                    while (myReader.hasNextLine()){
+                        txt_out = myReader.nextLine() + "\n";
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -113,6 +115,23 @@ public class ImgPage extends Fragment {
                 dir_txt.setText(txt_out);
             }
         });
+
+        binding.button4Changeimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp =  pthStr;
+                imggraf.setImageResource(R.drawable.fig_614_);
+            }
+        });
+    }
+
+    public native String c_mkdir(String pth);
+    public native String c_dircont(String pth);
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
 

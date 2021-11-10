@@ -4,6 +4,7 @@
 #include <fstream>
 #include "sqlite3.h"
 #include <sstream>
+#include<dirent.h>
 // Write C++ code here.
 //
 // Do not forget to dynamically load the C++ library into your application.
@@ -196,7 +197,7 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1find(JNIEnv *env, jobject
     while (sqlite3_step(sql_stmt) != SQLITE_DONE){
         id = sqlite3_column_int(sql_stmt, 0);
         txtname = reinterpret_cast<const char *>(sqlite3_column_text(sql_stmt,1));
-        ret_str += "id(" + std::to_string(id) + ")\nName : " + txtname + "\n";
+        ret_str += "id(" + std::to_string(id) + ")\nName : !" + txtname + "!\n";
     }
     ret_str += "-";
     sqlite3_finalize(sql_stmt);
@@ -208,105 +209,105 @@ Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1find(JNIEnv *env, jobject
 }
 
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1idlist(JNIEnv *env, jobject thiz,
-                                                              jstring mixed_data) {
-    std::string row(env ->GetStringUTFChars(mixed_data,0));
-    std::string id_str = "text";
-    std::string ret_ids = "+";
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1deleteDB(JNIEnv *env, jobject thiz,
+                                                                jstring pth, jstring idstr) {
+    std::string full_pth(env ->GetStringUTFChars(pth,0)); full_pth += "/cpptest.db";
+    std::string uid(env ->GetStringUTFChars(idstr,0));
+    std::string sql_command;
+    std::string ret_str = "";
     jstring out;
-    int ret = 0;
-    int i = 0;
-    int j = 0;
 
-    if (row[0] == '-'){out = env ->NewStringUTF(id_str.c_str()); return out;} id_str = "";
-    for (i=0; row[i] != '-'; i++){
-        if (row[i] == '('){
-            for (j = i+1; row[j] != ')' ; ++j) {
-                id_str += row[j];
-            }
-            ret_ids += id_str;
-            id_str = "+";
-        }
+    sqlite3 *db;
+    char *zErrMsg = 0;
+    int rc;
 
+    rc = sqlite3_open(full_pth.c_str(), &db);
+
+    if (rc){
+        ret_str += "Can`t open DB\n";
+        out = env -> NewStringUTF(ret_str.c_str());
+        return out;
+    } else {
+        ret_str += "Open OK\n";
     }
-    id_str = "i" + ret_ids + "-n";
-    out = env ->NewStringUTF(id_str.c_str());
+
+    sql_command = "DELETE FROM test_table WHERE id = " + uid + " ;";
+    rc = sqlite3_exec(db, sql_command.c_str(), callback_emptyfun, 0, &zErrMsg);
+    if( rc != SQLITE_OK ){
+        ret_str += "!!!NOK. Input error: ";
+        ret_str += zErrMsg;
+    } else {
+        ret_str += "OK input";
+    }
+    sqlite3_close(db);
+
+    out = env -> NewStringUTF(ret_str.c_str());
     return out;
 }
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1setid(JNIEnv *env, jobject thiz,
-                                                             jstring idlist, jint id_nr) {
-    std::string row(env ->GetStringUTFChars(idlist,0));
-    std::string out_str; out_str = "";
-    std::string id_str = "";
-    int nr = id_nr;
-    int j = 0;
+Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1saveDB(JNIEnv *env, jobject thiz,
+                                                              jstring pth, jstring newname,
+                                                              jstring idstr) {
+    std::string full_pth(env ->GetStringUTFChars(pth,0)); full_pth += "/cpptest.db";
+    std::string nname(env ->GetStringUTFChars(newname,0));
+    std::string uid(env ->GetStringUTFChars(idstr,0));
 
-    for (int i = 0; row[i] != 'n'; ++i) {
-        if ((row[i] == '+')&&(row[i+1]!='n')){
-            for (j = i + 1; row[j] != '+' ; ++j) {
-                id_str += row[j];
-            }
-            nr--;
-            if (nr == 0){
-                out_str += id_str;
-                jstring out;
-                out = env ->NewStringUTF(out_str.c_str());
-                return out;
-            }
-            id_str = "";
-        }
-    }
-
-    out_str = "-1";
+    std::string sql_command;
+    std::string ret_str = "";
     jstring out;
-    out = env ->NewStringUTF(out_str.c_str());
-    return out;
-}
 
+    sqlite3 *db;
+    char *zErrMsg = 0;
+    int rc;
 
-extern "C"
-JNIEXPORT jint JNICALL
-Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1nexttest(JNIEnv *env, jobject thiz,
-                                                                jstring txtdata, jint nxt) {
-    int next = nxt;
-    int max = 6;
-    jint ret = -1;
-    int i = 0;
-    if (next > max){ return ret;}
-    else {
-        for (i = 1; (i < max); ++i) {
-            next -= i;
-            if (next == 0){ ret = i; return ret;}
-        }
+    rc = sqlite3_open(full_pth.c_str(), &db);
+
+    if (rc){
+        ret_str += "Can`t open DB\n";
+        out = env -> NewStringUTF(ret_str.c_str());
+        return out;
+    } else {
+        ret_str += "Open OK\n";
     }
-    ret = -2;
-    return ret;
+
+    sql_command = "UPDATE test_table SET name = '" + nname + "' WHERE id = " + uid + " ;";
+    rc = sqlite3_exec(db, sql_command.c_str(), callback_emptyfun, 0, &zErrMsg);
+    if( rc != SQLITE_OK ){
+        ret_str += "!!!NOK. Input error: ";
+        ret_str += zErrMsg;
+    } else {
+        ret_str += "OK input";
+    }
+    sqlite3_close(db);
+
+    out = env -> NewStringUTF(ret_str.c_str());
+    return out;
 }
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1itertest(JNIEnv *env, jobject thiz,
-                                                                jstring txtdata, jint nxt) {
-    std::string out_str("test");
-    jstring out;
-    out = env ->NewStringUTF(out_str.c_str());
+Java_com_example_data_1store_1try2_ImgPage_c_1mkdir(JNIEnv *env, jobject thiz, jstring pth) {
+    jstring out = (jstring) "test";
+
     return out;
 }
-
-
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_example_data_1store_1try2_DB_1SQLite_1try2_c_1malloctry1(JNIEnv *env, jobject thiz,
-                                                                  jstring roguedata) {
-    std::string row(env ->GetStringUTFChars(roguedata,0)); row = "testtext";
-    jstring out;
+Java_com_example_data_1store_1try2_ImgPage_c_1dircont(JNIEnv *env, jobject thiz, jstring pth) {
+    std::string full_pth(env ->GetStringUTFChars(pth,0));
+    std::string ret_str = "";
+    struct dirent *d;
+    DIR *dr;
 
-    char * buf;
+    jstring out = (jstring) "test";
 
-    buf = (char *) malloc(4);
-
-    out = env ->NewStringUTF(row.c_str());
+    dr = opendir(full_pth.c_str());
+    if (dr != NULL){
+        for (d=readdir(dr);d!=NULL;d=readdir(dr)){ ret_str += d->d_name; ret_str += "\n";}
+        closedir(dr);
+    }
+    out = env -> NewStringUTF(ret_str.c_str());
     return out;
 }

@@ -129,6 +129,36 @@ public class DB_SQLite_try2 extends Fragment{
             }
         });
 
+        binding.button3Find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String();
+                tmp = c_find(pthStr, etName.getText().toString());
+                txtView.setText(tmp);
+            }
+        });
+
+        binding.button3Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tmp = new String();
+                tmp = etMail.getText().toString();
+                tmp = c_deleteDB(pthStr,tmp);
+                txtView.setText(tmp);
+
+            }
+        });
+
+        binding.button3Savedb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nname = etName.getText().toString();
+                String uid = etMail.getText().toString();
+                String tmp = c_saveDB(pthStr,nname,uid);
+                txtView.setText(tmp);
+            }
+        });
+
         binding.button4Toimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,40 +166,6 @@ public class DB_SQLite_try2 extends Fragment{
                         .navigate(R.id.action_DB_SQL_to_img_Page);
             }
         });
-
-        binding.button3Find.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tmp = new String();
-                tmp = c_find(pthStr, etName.getText().toString());
-                id_vector = new Vector();
-                String tmp2 = new String(); tmp2 = "";
-                tmp2 = c_idlist(tmp);
-                txtView.setText(tmp2);
-                int next = 1; // ids start from 1
-                int idS = 1;
-
-                tmp2 ="test\n";
-
-                for (int i = 0 ; idS> -1; i++){
-                    idS = c_nexttest("test",i);
-                    tmp2 +=Integer.toString(idS);
-                }
-                //tmp2 += Integer.toString(next);
-                txtView.setText(tmp2);
-
-            }
-        });
-
-        binding.button3Delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tmp = new String(); tmp = "";
-                tmp = c_malloctry1("test1");
-                txtView.setText(tmp);
-            }
-        });
-
     }
 
     public native int c_retstr();
@@ -179,10 +175,8 @@ public class DB_SQLite_try2 extends Fragment{
     public native String c_appendDB(String pth, String text_name);
     public native String c_readDB(String pth);
     public native String c_find(String pth, String tname);
-    public native String c_idlist(String mixed_data);
-    public native int c_nexttest(String txtdata, int nxt);
-    public native String c_itertest(String txtdata, int nxt);
-    public native String c_malloctry1(String roguedata);
+    public native String c_deleteDB(String pth, String idstr);
+    public native String c_saveDB(String pth, String newname, String idstr);
 
 
     @Override
